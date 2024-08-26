@@ -2,15 +2,18 @@ import useForm from "../../hooks/useForm";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFormData } from "../../redux/form/formActions";
 import ModalInfo from "../../components/ModalInfo";
+import ModalWithButton from "../../components/ModalWithButton";
 import { useState } from "react";
 import { motion } from 'framer-motion';
 import { SET_PASSWORD } from "../../redux/form/formTypes";
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
     const [values, handleChange] = useForm({ username: '', email: '', password: '' });
     const [showModal, setShowModal] = useState(false);
+    const [showModalWithButton, setShowModalWithButton] = useState(false);
     const [message, setMessage] = useState("");
-    const [modalType, setModalType] = useState(""); 
+    const [messageButton, setMessageButton] = useState(""); 
     const [showPassword, setShowPassword] = useState(false);
     const form = useSelector(state => state.form);
     const dispatch = useDispatch();
@@ -22,13 +25,13 @@ const LoginForm = () => {
             dispatch(saveFormData(values));
         } else {
             setMessage("Password incorrecto");
-            setModalType("error");
             setShowModal(true);
         }
     };
 
     const hideModal = () => {
         setShowModal(false);
+        setShowModalWithButton(false);
     };
 
     const PasswordVisibility = () => {
@@ -43,10 +46,15 @@ const LoginForm = () => {
         >
             <div className="container">
                 <ModalInfo 
-                    visible={showModal} 
+                    visible={showModal && !showModalWithButton} 
                     message={message}
+                    onClose={hideModal}   
+                />
+                <ModalWithButton 
+                    visible={showModalWithButton} 
+                    message={message}
+                    messageButton={messageButton}
                     onClose={hideModal}
-                    type={modalType}    
                 />
                 <form onSubmit={handleSubmit}>
                     <h2>Login Form</h2>
@@ -86,11 +94,18 @@ const LoginForm = () => {
                     </div>
                     <div className="button-container">
                         <button type="submit">Submit</button>
-                        <button type="button" onClick={() => {
-                            setMessage("Bienvenidos al módulo 7");
-                            setModalType("info");
-                            setShowModal(true);
-                        }}>Mostrar Modal</button>
+                        <Link 
+                            className="logout"
+                            to="/login"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setMessage("¿Estás seguro de que quieres cerrar sesión?");
+                                setMessageButton("Presionar para salir");
+                                setShowModalWithButton(true);
+                            }}
+                        >
+                            Logout
+                        </Link>
                     </div>
                 </form>
             </div>

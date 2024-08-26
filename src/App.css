@@ -166,4 +166,13 @@ form div input {
   color:#ccc;
 }
 
+.logout {
+  font-size: 18px;
+  text-align: right;
+  color: blue;
+  text-decoration: underline;
+  margin-left: 10;
+  padding-left: 10;
+}
+
 
