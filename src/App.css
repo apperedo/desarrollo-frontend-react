@@ -159,4 +159,11 @@ form div input {
   cursor: pointer;
 }
 
+.bienvenido {
+  font-size: 18px; 
+  font-weight: bold; 
+  text-align: right;
+  color:#ccc;
+}
+
 
