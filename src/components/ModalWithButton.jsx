@@ -1,10 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { clearFormData } from '../redux/form/formActions';
 
 const ModalWithButton = ({ visible, message, messageButton, onClose }) => {
+    const dispatch = useDispatch();
+    
     if (!visible) {
         return null;
     }
+
+    const handleButtonClick = () => {
+        dispatch(clearFormData());
+        onClose();
+    }
+
     return (
         <div className="modal-overlay">
             <motion.div
@@ -16,7 +26,7 @@ const ModalWithButton = ({ visible, message, messageButton, onClose }) => {
             <div>
                 <p>{message}</p>
                 <button
-                    onClick={onClose}>
+                    onClick={handleButtonClick}>
                         {messageButton}
                 </button>
             </div>

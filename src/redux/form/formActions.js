@@ -1,5 +1,4 @@
-import { SET_FORM_DATA } from './formTypes';
-import { SET_PASSWORD } from './formTypes';
+import { SET_FORM_DATA, SET_PASSWORD, CLEAR_FORM_DATA } from './formTypes';
 
 export const saveFormData = (formData) => {
     return {
@@ -9,5 +8,11 @@ export const saveFormData = (formData) => {
             email: formData.email,
             password: SET_PASSWORD,
         },
+    }
+}
+
+export const clearFormData = () => {
+    return {
+        type: CLEAR_FORM_DATA, 
     }
 }

@@ -1,6 +1,6 @@
 import useForm from "../../hooks/useForm";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFormData } from "../../redux/form/formActions";
+import { saveFormData, clearFormData } from "../../redux/form/formActions";
 import ModalInfo from "../../components/ModalInfo";
 import ModalWithButton from "../../components/ModalWithButton";
 import { useState } from "react";
