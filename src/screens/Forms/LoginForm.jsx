@@ -11,6 +11,7 @@ const LoginForm = () => {
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState("");
     const [modalType, setModalType] = useState(""); 
+    const [showPassword, setShowPassword] = useState(false);
     const form = useSelector(state => state.form);
     const dispatch = useDispatch();
 
@@ -28,6 +29,10 @@ const LoginForm = () => {
 
     const hideModal = () => {
         setShowModal(false);
+    };
+
+    const PasswordVisibility = () => {
+        setShowPassword(!showPassword); 
     };
 
     return (
@@ -69,12 +74,15 @@ const LoginForm = () => {
                     <div>
                         <label htmlFor="password">Password</label>
                         <input 
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             id="password"
                             name="password"
                             value={values.password}
                             onChange={handleChange}
                         />
+                        <button type="button" onClick={PasswordVisibility}>
+                            {showPassword ? 'Hide' : 'Show'} 
+                        </button>
                     </div>
                     <div className="button-container">
                         <button type="submit">Submit</button>
