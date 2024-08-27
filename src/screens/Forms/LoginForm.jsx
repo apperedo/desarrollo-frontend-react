@@ -9,7 +9,7 @@ import { SET_PASSWORD } from "../../redux/form/formTypes";
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
-    const [values, handleChange] = useForm({ username: '', email: '', password: '' });
+    const [values, handleChange, resetForm] = useForm({ username: '', email: '', password: '' });
     const [showModal, setShowModal] = useState(false);
     const [showModalWithButton, setShowModalWithButton] = useState(false);
     const [message, setMessage] = useState("");
@@ -38,6 +38,20 @@ const LoginForm = () => {
         setShowPassword(!showPassword); 
     };
 
+    const handleLogoutClick = (e) => {
+        e.preventDefault();
+        setMessage("¿Estás seguro de que quieres cerrar sesión?");
+        setMessageButton("Presionar para salir");
+        setShowModalWithButton(true);
+    };
+
+    const handleLogoutConfirm = () => {
+        dispatch(clearFormData()); 
+        resetForm(); 
+        setShowModalWithButton(false);
+    };
+
+
     return (
         <motion.div
             initial={{ opacity: 0, y: -70 }}
@@ -55,6 +69,7 @@ const LoginForm = () => {
                     message={message}
                     messageButton={messageButton}
                     onClose={hideModal}
+                    onButtonClick={handleLogoutConfirm}
                 />
                 <form onSubmit={handleSubmit}>
                     <h2>Login Form</h2>
@@ -97,12 +112,7 @@ const LoginForm = () => {
                         <Link 
                             className="logout"
                             to="/login"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setMessage("¿Estás seguro de que quieres cerrar sesión?");
-                                setMessageButton("Presionar para salir");
-                                setShowModalWithButton(true);
-                            }}
+                            onClick={handleLogoutClick}
                         >
                             Logout
                         </Link>

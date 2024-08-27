@@ -7,12 +7,12 @@ export const saveFormData = (formData) => {
             username: formData.username,
             email: formData.email,
             password: SET_PASSWORD,
-        },
-    }
-}
+        }
+    };
+};
 
 export const clearFormData = () => {
     return {
         type: CLEAR_FORM_DATA, 
-    }
-}
+    };
+};

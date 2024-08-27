@@ -4,7 +4,7 @@ const initialState = {
     formData: {
         username:'',
         email:'',
-        passwrod:'',
+        password:'',
     },
 };
 
@@ -22,11 +22,7 @@ const formReducer = (state = initialState, action) => {
         case CLEAR_FORM_DATA: {
             return {
                 ...state,
-                formData: {
-                    username: '',
-                    email: '',
-                    password: '',
-                }
+                formData: initialState.formData,
             }
         }
         default:
