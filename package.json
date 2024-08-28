@@ -23,6 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://apperedo.github.io/desarrollo-frontend-react",
   "eslintConfig": {
     "extends": [
       "react-app",
